@@ -1,4 +1,18 @@
 {
-  "name": "Winnitron Lancher",
-  "main": "index.html"
+  "name":         "WinnitronLancher",
+  "version":      "0.1.0",
+  "description":  "Launch Winnitron games",
+
+  "main":         "index.html",
+
+  "window": {
+    "title":      "Winnitron",
+    "width":      800,
+    "height":     600
+  },
+
+  "dependencies": {
+    "jquery":   "~2.1.1"
+  }
+
 }
