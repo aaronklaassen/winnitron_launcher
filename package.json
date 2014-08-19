@@ -7,8 +7,8 @@
 
   "window": {
     "title":      "Winnitron",
-    "width":      800,
-    "height":     600
+    "fullscreen": true,
+    "toolbar":    false
   },
 
   "dependencies": {

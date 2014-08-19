@@ -1,12 +1,15 @@
 var $ = require("jquery");
 var child = require("child_process");
+var gui = global.window.nwDispatcher.requireNwGui();
+
 
 var KEYS = {
   UP:     38,
   DOWN:   40,
   LEFT:   37,
   RIGHT:  39,
-  ENTER:  13
+  ENTER:  13,
+  ESC:    27
 };
 
 var currentMenuSelection = 1;
@@ -23,14 +26,18 @@ function handleKeyPress(keycode) {
     case KEYS.ENTER:
       launchGame();
       break;
+    case KEYS.ESC:
+      gui.App.quit();
+      break;
   }
+
 }
 
 function launchGame() {
   filename = GAMES[currentMenuSelection - 1].exec;
   console.log("LAUNCHING: " + filename);
 
-  var game = child.exec(filename, function (error, stdout, stderr) {
+  var game = child.execFile(filename, function (error, stdout, stderr) {
     if (error) {
       console.log(error.stack);
       console.log('Error code: '+error.code);
@@ -38,6 +45,7 @@ function launchGame() {
     }
     console.log('Child Process STDOUT: '+stdout);
     console.log('Child Process STDERR: '+stderr);
+
   });
 
   game.on('exit', function (code) {
