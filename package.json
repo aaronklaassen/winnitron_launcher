@@ -8,7 +8,7 @@
   "window": {
     "title":      "Winnitron",
     "fullscreen": true,
-    "toolbar":    false
+    "toolbar":    true
   },
 
   "dependencies": {

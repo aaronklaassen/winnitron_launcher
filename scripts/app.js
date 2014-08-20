@@ -29,6 +29,9 @@ function handleKeyPress(keycode) {
     case KEYS.ESC:
       gui.App.quit();
       break;
+    default:
+      console.log(keycode);
+      break;
   }
 
 }
@@ -37,7 +40,8 @@ function launchGame() {
   filename = GAMES[currentMenuSelection - 1].exec;
   console.log("LAUNCHING: " + filename);
 
-  var game = child.execFile(filename, function (error, stdout, stderr) {
+  /*
+  var game = child.execFile(filename, [], { cwd: "C:/GOG/Wing Commander IV/" }, function (error, stdout, stderr) {
     if (error) {
       console.log(error.stack);
       console.log('Error code: '+error.code);
@@ -51,6 +55,9 @@ function launchGame() {
   game.on('exit', function (code) {
     console.log('Child process exited with exit code '+code);
   });
+  */
+
+  gui.Shell.openItem(filename);
 }
 
 function selectGame(direction) {
@@ -71,11 +78,11 @@ function loadGames() {
   GAMES = [
             {
               "name": "Calculator",
-              "exec": "/Applications/Calculator.app/Contents/MacOS/Calculator"
+              "exec": "C:/windows/system32/calc.exe"
             },
             {
-              "name": "Calendar",
-              "exec": "/Applications/Calendar.app/Contents/MacOS/Calendar"
+              "name": "WC4",
+              "exec": "C:/GOG/Wing Commander IV/Launch Wing Commander IV.lnk"
             },
             {
               "name": "Safari",
@@ -93,6 +100,8 @@ function loadGames() {
 
 
 $(function() {
+
+  gui.Window.get().enterFullscreen(); // For some reason Windows needs this.
 
   loadGames();
 
